@@ -75,7 +75,7 @@
   <middle>
     <section title="Introduction" anchor="intro" toc="default">
       <t>
-        Implementation of <xref target="RFC4760">Multiprotocol Extensions for BGP-4</xref> allows to pass aribtrary data in BGP protocol messages. This capability has been leveraged by many for dissemination of non-routing related information over BGP (for example, see "Dissemination of Flow Specification Rules" defined in <xref target="RFC5575"/>). However, there has been no channel defined explicitly to disseminate data with arbitrary opaque payload. The intended use case is for applications other than BGP to leverage the protocol machinery for distribution of their own state in the network domain. Publishers and consumers will use BGP UPDATE messages to exhcnage opaque data. It is up to the BGP implementation to provide a custom API for message producers or consumers if needed. 
+        Implementation of <xref target="RFC4760">Multiprotocol Extensions for BGP-4</xref> allows to pass aribtrary data in BGP protocol messages. This capability has been leveraged by many for dissemination of non-routing related information over BGP (for example, see "Dissemination of Flow Specification Rules" defined in <xref target="RFC5575"/>). However, there has been no channel defined explicitly to disseminate data with arbitrary payload. The intended use case is for applications other than BGP to leverage the protocol machinery for distributioni (broadcasting) of their own state in the network domain. Publishers and consumers will use BGP UPDATE messages to submit and receive opaque data. It is up to the BGP implementation to provide a custom API for message producers or consumers if needed. 
       </t>
     </section>
     <section title="BGP Opaque Data AFI" toc="default">
@@ -85,7 +85,7 @@
     </section>
     <section title="BGP Key-Value SAFI" toc="default">
       <t>
-        This document introduces a new SAIF known as "BGP Key-Value SAFI". The purpose of this SAFI is exchange of opaque information structured as a Key-Value binding (advertisement).
+        This document introduces a new SAIF known as "BGP Key-Value SAFI"i with the actual value to be assigned by IANA. The purpose of this SAFI is exchange of opaque information structured as a Key-Value binding.
       </t>
     </section>
     <section title="Capability Advertisement" toc="default">
@@ -101,12 +101,12 @@
             Publishers, acting as BGP speakers, advertise keys along with associated values into the routing domain. The BGP network synchronizes that state by propagating the encoded data following regular BGP protocol operations. 
           </t>
           <t>
-            Consumers, acting as BGP speakers, receive the information via BGP protocol UPDATE messages. Only publishers and consumers of the opaque data are supposed to interpret its contents - the rest of the BGP network acts merely as a dissemination system.
+            Consumers, acting as BGP speakers, receive the information via BGP protocol UPDATE messages. Only publishers and consumers of the opaque data are supposed to interpret its contents - the rest of the BGP network acts merely as a dissemination system. 
           </t>
         </list>
       </t>
       <t>
-        Multiple publishers can advertise the same key (NLRI) associated with different values. It is also possible for the advertised associations to have the same Key-Value pairs but differ in there other BGP attributes. In that case, BGP would follow the best-path selection logic to prevent duplicate information in the network. A consumer will receive the value created by the publisher "closest" in terms of BGP best-path selection logic, based on the policies that exist in the routing domain. This document does not propose any method of achieving global consensus for all published values for a given key. See section <xref target="add_path"/> that discusses the means of propagating multiple values for the same key.
+        Multiple publishers can advertise the same key (NLRI) bound to different values. It is also possible for the advertised binding to have the same Key-Value pairs but differ in some other BGP attributes. In that case, BGP would follow the best-path selection logic to prevent duplicate information in the network. A consumer will receive the value created by the publisher "closest" in terms of BGP best-path selection logic, based on the policies that exist in the routing domain. This document does not propose any method of achieving global consensus for all published values for a given key. 
       </t>  
       <section title="Publishing a Key-Value binding" toc="default">
         <t>
@@ -205,24 +205,7 @@
       </section>
       <section title="Propagating multiple values for the same key" anchor="add_path" toc="default">
         <t>
-           It is possible to propagate multiple values associated with the same key using the Add-Path extension defined in <xref target="I-D.ietf-idr-add-paths" />. The values are differentiated by the Path Identifier field present in the key. If the capability is negotiated between two BGP speakers, the key encoding in NLRI field of MP_REACH_NLRI and MP_UNREACH_NLRI attributes is extended to look as shown on <xref target="add_path_encoding"/>. The "Opaque Key Length" and "Opaque Key Data" retain the same meaning as defined previously.
-        </t>
-        <figure title="AddPath Encoding" anchor="add_path_encoding" suppress-title="false" align="left" alt="" width="" height="">
-          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height=""> 
-          +---------------------------------------------------------+
-          | Path Identifier (4 octets)                              |
-          +---------------------------------------------------------+
-          | Opaque Key Length (1 octet)                             |
-          +---------------------------------------------------------+
-          | Opaque Key Data (variable)                              |
-          +---------------------------------------------------------+
-          </artwork>
-        </figure>  
-        <t>
-          The above defined encoding is to be used both with MP_REACH_NLRI and MP_UNREACH_NLRI attributes. It is up to the implementation to decide how many additional values to propagate with the key.
-        </t>
-        <t>
-          Note that the Add-Path extension could also be used to propagate the same Key-Value pairs with different Path Identifiers, assuming that other BGP attributes associated with the same NLRI are different.
+           It is possible to propagate multiple values associated with the same key using the Add-Path extension defined in <xref target="I-D.ietf-idr-add-paths" />. However, this document recommends that instead unique key values be used for this purpose. It is up to the consumers and publishers of the opaque data to settle on single unique value using some kind of consensum protocol.
         </t>
       </section>
     </section>
