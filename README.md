@@ -1,4 +1,4 @@
 draft-lapukhov-bgp-opaque-signaling
 ===================================
 
-BGP Opaque AFI/SAFI
+XML Source for BGP Opaque AFI/SAFI
