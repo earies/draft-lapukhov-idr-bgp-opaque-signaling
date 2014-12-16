@@ -8,8 +8,10 @@
     docName="draft-lapukhov-bgp-opaque-signaling-01" obsoletes=""
     updates="" submissionType="IETF" xml:lang="en">
   <front>
-    <title abbrev="draft-lapukhov-bgp-opaque-signaling">Use of BGP for Opaque Signaling</title>
-    <author initials="P." surname="Lapukhov" fullname="Petr Lapukhov" role="editor">
+    <title abbrev="Use of BGP for Opaque Signaling">Use of BGP for
+        Opaque Signaling</title>
+    <author initials="P." surname="Lapukhov" fullname="Petr Lapukhov"
+        role="editor">
       <organization>Facebook</organization>
       <address>
         <postal>
@@ -22,7 +24,8 @@
         <email>petr@fb.com</email>
       </address>
     </author>    
-    <author initials="E." surname="Aries" fullname="Ebben Aries" role="editor">
+    <author initials="E." surname="Aries" fullname="Ebben Aries"
+        role="editor">
       <organization>Facebook</organization>
       <address>
         <postal>
@@ -95,7 +98,7 @@
     <section title="Introduction" anchor="intro" toc="default">
       <t>
         Implementation of <xref target="RFC4760">Multiprotocol
-        Extensions for BGP-4</xref> allows to pass aribtrary data in
+        Extensions for BGP-4</xref> allows to pass arbitrary data in
         BGP protocol messages. This capability has been leveraged by
         many for dissemination of non-routing related information over
         BGP (e.g. <xref target="RFC5575">"Dissemination of Flow
@@ -178,8 +181,11 @@
           the MP_REACH_NLRI attribute, as shown on <xref
           target="mp_reach_nlri"/>. 
         </t>
-        <figure title="MP_REACH_NLRI Layout" anchor="mp_reach_nlri" suppress-title="false" align="left" alt="" width="" height="">
-          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">  
+        <figure title="MP_REACH_NLRI Layout" anchor="mp_reach_nlri"
+            suppress-title="false" align="left" alt="" width=""
+            height="">
+          <artwork xml:space="preserve" name="" type="" align="left"
+              alt="" width="" height="">  
 +---------------------------------------------------------+
 | AFI (2 octets)                                          |
 +---------------------------------------------------------+
@@ -221,8 +227,11 @@
           a new optional transitive attribute as shown on <xref
           target="opaque_value_attribute"/>:
         </t>
-        <figure title="OPAQUE_VALUE attribute layout" anchor="opaque_value_attribute" suppress-title="false" align="left" alt="" width="" height="">
-          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">  
+        <figure title="OPAQUE_VALUE attribute layout"
+            anchor="opaque_value_attribute" suppress-title="false"
+            align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left"
+              alt="" width="" height="">  
 0                   1                   2                   3
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -280,8 +289,11 @@
           received from the withdrawing BGP peer, such key removal
           request MUST be ignored.
         </t>
-        <figure title="MP_UNREACH_NLRI attribute layout" anchor="mp_unreach_nlri" suppress-title="false" align="left" alt="" width="" height="">
-          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height=""> 
+        <figure title="MP_UNREACH_NLRI attribute layout"
+            anchor="mp_unreach_nlri" suppress-title="false" align="left"
+            alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left"
+              alt="" width="" height=""> 
 +---------------------------------------------------------+
 | AFI (2 octets)                                          |
 +---------------------------------------------------------+
@@ -299,7 +311,8 @@
           </artwork>
         </figure>  
       </section>
-      <section title="Propagating multiple values for the same key" anchor="add_path" toc="default">
+      <section title="Propagating multiple values for the same key"
+          anchor="add_path" toc="default">
         <t>
            It is possible to propagate multiple values associated with
            the same key using the Add-Path extension defined in <xref
