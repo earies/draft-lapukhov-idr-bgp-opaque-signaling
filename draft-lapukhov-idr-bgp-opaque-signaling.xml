@@ -5,7 +5,7 @@
 <?rfc subcompact="no"?>
 <?rfc symrefs="yes" ?>
 <rfc category="std" ipr="trust200902"
-    docName="draft-lapukhov-bgp-opaque-signaling-01" obsoletes=""
+    docName="draft-lapukhov-idr-bgp-opaque-signaling-01" obsoletes=""
     updates="" submissionType="IETF" xml:lang="en">
   <front>
     <title abbrev="Use of BGP for Opaque Signaling">Use of BGP for
@@ -64,7 +64,7 @@
         <email>edetn@microsoft.com</email>
       </address>
     </author>        
-    <date year="2014"/>
+    <date year="2015"/>
     <area>Routing</area>
     <workgroup>Inter-Domain Routing</workgroup>
     <keyword>Internet Draft</keyword>
@@ -98,11 +98,11 @@
     <section title="Introduction" anchor="intro" toc="default">
       <t>
         Implementation of <xref target="RFC4760">Multiprotocol
-        Extensions for BGP-4</xref> allows to pass arbitrary data in
-        BGP protocol messages. This capability has been leveraged by
-        many for dissemination of non-routing related information over
-        BGP (e.g. <xref target="RFC5575">"Dissemination of Flow
-        Specification Rules"</xref> as well as <xref
+        Extensions for BGP-4</xref> gives the ability to pass
+        arbitrary data in BGP protocol messages. This capability has
+        been leveraged by many for dissemination of non-routing related
+        information over BGP (e.g. <xref target="RFC5575">"Dissemination
+        of Flow Specification Rules"</xref> as well as <xref
         target="I-D.ietf-idr-ls-distribution">"North-Bound
         Distribution of Link-State and TE Information using
         BGP"</xref>). However, there has been no channel defined
@@ -135,7 +135,7 @@
       <t>
         A BGP speaker that wishes to exchange Opaque Data MUST use the
         Multiprotocol Extensions Capability Code, as defined in <xref
-        target="RFC2858"/>, to advertise the corresponding AFI/SAFI
+        target="RFC4760"/>, to advertise the corresponding AFI/SAFI
         pair.
       </t>
     </section>    
@@ -187,9 +187,9 @@
           <artwork xml:space="preserve" name="" type="" align="left"
               alt="" width="" height="">  
 +---------------------------------------------------------+
-| AFI (2 octets)                                          |
+| Address Family Identifier (2 octets)                    |
 +---------------------------------------------------------+
-| SAFI (1 octet)                                          |
+| Subsequent Address Family Identifier (1 octet)          |
 +---------------------------------------------------------+
 | Length of Next Hop Address (1 octet), must be zero      |
 +---------------------------------------------------------+
@@ -295,9 +295,9 @@
           <artwork xml:space="preserve" name="" type="" align="left"
               alt="" width="" height=""> 
 +---------------------------------------------------------+
-| AFI (2 octets)                                          |
+| Address Family Identifier (2 octets)                    |
 +---------------------------------------------------------+
-| SAFI (1 octet)                                          |
+| Subsequent Address Family Identifier (1 octet)          |
 +---------------------------------------------------------+
 | Opaque Key 1 Length (1 octet)                           |
 +---------------------------------------------------------+
@@ -355,15 +355,15 @@
         </t>
       </section>
     </section>
-    <section title="Acknowledgements" toc="default">
-      <t>
-        TBD
-      </t>
-    </section>
     <section title="IANA Considerations" toc="default">
       <t>
         For the purpose of this work, IANA would be asked to allocate
         values for the new AFI and SAFI.
+      </t>
+    </section>
+    <section title="Manageability Considerations" toc="default">
+      <t>
+        TBD
       </t>
     </section>
     <section title="Security Considerations" toc="default">
@@ -372,11 +372,15 @@
         security.
       </t>
     </section>
+    <section title="Acknowledgements" toc="default">
+      <t>
+        TBD
+      </t>
+    </section>
   </middle>
   <back>
     <references title="Normative References">
       <?rfc include="reference.RFC.2119.xml"?>
-      <?rfc include="reference.RFC.2858.xml"?>
       <?rfc include="reference.RFC.4271.xml"?>
     </references>
     <references title="Informative References">
