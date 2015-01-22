@@ -74,15 +74,15 @@
     <abstract>
       <t>
         Border Gateway Protocol with multi-protocol extensions (MP-BGP)
-        <xref target="RFC4760"/> enables the use of the protocol for
-        dissemination of virtually any information. This document
-        proposes a new Address Family/Subsequent Address Family to be
-        used for distribution of opaque data. This functionality is
-        intended to be used by applications other than BGP for exchange
-        of their own data on top of BGP mesh. The structure of such data
-        MAY to be interpreted by the regular BGP speakers, rather the
-        goal is to use BGP purely as a convenient and scalable
-        communication system.
+        enables the use of the protocol for dissemination of virtually
+        any information. This document proposes a new Address
+        Family/Subsequent Address Family to be used for distribution of
+        opaque data. This functionality is intended to be used by
+        applications other than BGP for exchange of their own data on
+        top of BGP mesh. The structure of such data MAY to be
+        interpreted by the regular BGP speakers, rather the goal is to
+        use BGP purely as a convenient and scalable communication
+        system.
       </t>
     </abstract>
     <note title="Requirements Language">
