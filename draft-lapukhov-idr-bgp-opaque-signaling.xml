@@ -205,7 +205,7 @@
 +---------------------------------------------------------+
 | Reserved (1 octet), must be zero                        |
 +---------------------------------------------------------+
-| Opaque Key Length (1 octet)                             |
+| Opaque Key Length (2 octet)                             |
 +---------------------------------------------------------+
 | Opaque Key Data (variable)                              |
 +---------------------------------------------------------+
@@ -221,14 +221,16 @@
               information is encoded in the next-hop address field.
             </t>
             <t>
-              Opaque Key Length: identifies the size of the Key field.
-              If field is set to zero, the implementation MUST ignore
-              the advertisement. 
+              Opaque Key Length: identifies the size of the Key field
+              in octets. If field is set to zero, the implementation MUST ignore
+              the advertisement. The Key length of 2 octets allows BGP
+              Opaque SAFI to carry NLRI longer than 255 octets. This draft
+              defines a maximum Key Length of 4000 bytes.
             </t>
             <t>
               Opaque Key Data: the byte string representing the opaque
               key contents. This portion SHOULD NOT be interpreted by
-              BGP implementation.
+              BGP implementation. 
             </t>
           </list>
         </t>
@@ -245,6 +247,16 @@
 0                   1                   2                   3
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   AS Number (4 Octets)                        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Originator ID (16 Octets)                   ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |     Type      |0 0 0 0| Opaque Value Length   |               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+               |
 ~                                                               ~
@@ -254,6 +266,16 @@
         </figure>   
         <t>
           <list style="symbols">
+            <t>  
+              AS Number: Four octets encoding the AS Number of an Autonomous
+              System originating the prefix.  The AS Number value will be the
+              value assigned by IANA.  
+            </t>
+            <t>
+              Originator ID: 16 Octets encoding the Originator ID value. 
+              Originator ID could be an IPv4 Address or an IPv6 Address
+              of a router originating the NLRI.
+            </t>
             <t>
               Type: Identifies the new OPAQUE_VALUE attribute, with the
               value to be allocated by IANA.
@@ -309,12 +331,12 @@
 +---------------------------------------------------------+
 | Subsequent Address Family Identifier (1 octet)          |
 +---------------------------------------------------------+
-| Opaque Key 1 Length (1 octet)                           |
+| Opaque Key 1 Length (2 octet)                           |
 +---------------------------------------------------------+
 | Opaque Key 1 Data (variable)                            |
 +---------------------------------------------------------+
 ~                                                         ~
-| Opaque Key N Length (1 octet)                           |
+| Opaque Key N Length (2 octet)                           |
 +---------------------------------------------------------+
 | Opaque Key N Data (variable)                            |
 +---------------------------------------------------------+
@@ -369,6 +391,13 @@
       <t>
         For the purpose of this work, IANA would be asked to allocate
         values for the new AFI and SAFI.
+      </t>
+      <t>
+        This draft a new NLRI type value for BGP Opaque SAFI. The type
+        value is used to identify a given Service type. We request IANA
+        to create a new registry BGP service types under BGP Opaque
+        SAFI.
+          
       </t>
     </section>
     <section title="Manageability Considerations" toc="default">
